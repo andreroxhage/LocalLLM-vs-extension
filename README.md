@@ -11,6 +11,8 @@ A Visual Studio Code extension that integrates local LLM models through Ollama, 
      ollama pull deepseek-coder:latest
      ```
 
+- dependencies: ollama: ^0.5.12
+
 ## Installation
 
 1. Clone this repository to your local machine
@@ -23,9 +25,9 @@ A Visual Studio Code extension that integrates local LLM models through Ollama, 
 
 ## Usage
 
-1. Make sure Ollama is running in the background
+1. Start Debugger for extension.ts (debugger: run extension),
 2. Open the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS)
-3. Type "LocalLLM: Start" and select the command
+3. Type "LocalLLM: Start Chat" and select the command
 4. A new chat interface will open in VS Code
 5. Start chatting with the AI assistant
 

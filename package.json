@@ -15,7 +15,7 @@
     "commands": [
       {
         "command": "vs-extension.start",
-        "title": "LocalLLM started!"
+        "title": "LocalLLM Start Chat!"
       }
     ]
   },

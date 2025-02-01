@@ -11,8 +11,6 @@ export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
     'vs-extension.start',
     () => {
-      vscode.window.showInformationMessage('LocalLLM is running!');
-
       const panel = vscode.window.createWebviewPanel(
         'LocalLLM',
         'LocalLLM',
@@ -31,7 +29,6 @@ export function activate(context: vscode.ExtensionContext) {
           let responseText = '';
 
           try {
-            // Send "thinking" status
             panel.webview.postMessage({
               command: 'updateStatus',
               status: 'thinking',
@@ -74,7 +71,6 @@ function getWebviewContent() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LocalLLM</title>
     <style>
-      /* ... Previous styles remain the same ... */
       body {
         font-family: var(--vscode-font-family);
         margin: 0;
@@ -83,6 +79,7 @@ function getWebviewContent() {
         flex-direction: column;
         height: 100vh;
         color: var(--vscode-foreground);
+        background-color: var(--vscode-editor-background);
       }
       #chat-container {
         flex: 1;
@@ -106,24 +103,6 @@ function getWebviewContent() {
       }
       .message.user {
         align-self: flex-end;
-      }
-      .avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-weight: bold;
-      }
-      .user .avatar {
-        background-color: var(--vscode-button-background);
-        color: var(--vscode-button-foreground);
-      }
-      .assistant .avatar {
-        background-color: var(--vscode-badge-background);
-        color: var(--vscode-badge-foreground);
       }
       .message-content {
         background-color: var(--vscode-input-background);
@@ -242,10 +221,7 @@ function getWebviewContent() {
         function createMessageElement(text, isUser = false) {
           const messageDiv = document.createElement('div');
           messageDiv.className = \`message \${isUser ? 'user' : 'assistant'}\`;
-          
-          const avatar = document.createElement('div');
-          avatar.className = 'avatar';
-          avatar.textContent = isUser ? 'U' : 'A';
+      
           
           const contentDiv = document.createElement('div');
           contentDiv.className = 'message-content';
@@ -269,7 +245,6 @@ function getWebviewContent() {
           }
           
           contentDiv.appendChild(textDiv);
-          messageDiv.appendChild(avatar);
           messageDiv.appendChild(contentDiv);
           
           return messageDiv;
